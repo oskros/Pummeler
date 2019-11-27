@@ -1,7 +1,8 @@
 Pummeler = {};
 function Pummeler_OnLoad()
-	this:RegisterEvent("PLAYER_ENTERING_WORLD");
-	this:RegisterEvent("ADDON_LOADED");
+    local frame = CreateFrame("FRAME", "DefaultFrame");
+	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
+	frame:RegisterEvent("ADDON_LOADED");
 	DEFAULT_CHAT_FRAME:AddMessage("Pummeler addon loaded. Type /pummeler for usage.");
 	SlashCmdList["PUMMELER"] = function()
 		local msg = "To use Pummeler addon, create a macro and type /script Pummeler_main();";
@@ -11,8 +12,6 @@ function Pummeler_OnLoad()
 	end;
 	SLASH_PUMMELER1 = "/pummeler";
 end;
-
-
 
 
 Pummeler_Start_HasteBuff_Time = 0;
