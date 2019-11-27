@@ -262,21 +262,21 @@ function GetNextSpell()
     _,_,in_cat_form = GetShapeshiftFormInfo(3);
 
     if (~in_cat_form) then
-        next_spell = "Cat Form";
+        next_spell = 768; -- Cat Form
     elseif (~autoattacking and cur_energy == 100) then
-        next_spell = "Tigers Fury";
+        next_spell = 5217; -- Tigers Fury
     elseif clearcasting then
-        next_spell = "Shred";
-    elseif (combo_pts == 5 and cur_energy < 52) then
-        next_spell = "Ferocious Bite";
+        next_spell = 9832; -- Shred
+    elseif (combo_pts == 5 and cur_energy < 63) then
+        next_spell = 22568 -- Ferocious Bite
     elseif (cur_energy < 28 and cur_mana > 612) then
         if gcd > 0 then
             next_spell = "WAIT";
         else
-            next_spell = "Cat Form";
+            next_spell = 768; -- Cat Form
         end
     else
-        next_spell = "Shred";
-    end
-    return next_spell
-end
+        next_spell = 9832; -- Shred
+    end;
+    return next_spell;
+end;
