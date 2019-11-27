@@ -259,7 +259,7 @@ function GetNextSpell()
     local mcp_haste = UnitBuff("player", 13494); -- test this
     local gcd = GetSpellCooldown(9832); -- shred spellID
     local in_cat_form = nil;
-    _,_,in_cat_form = GetShapeshiftFormInfo(i);
+    _,_,in_cat_form = GetShapeshiftFormInfo(3);
 
     if (~in_cat_form) then
         next_spell = "Cat Form";
