@@ -76,6 +76,32 @@ function Pummeler_main()
 	end;
 end;
 
+function Pummeler_availableCharges()
+    local bag_charges, equip_charges = 0;
+    local pummeler_id = 9449;
+    for i = 0, NUM_BAG_SLOTS do
+        for z = 1, GetContainerNumSlots(i) do
+            if GetContainerItemID(i, z) = pummeler_id then
+                bag_charges = bag_charges + Pummeler_getChargeNumber(Pummeler_getChargesText{bag=i, slot=z});
+            end;
+        end;
+    end;
+    equip_charges = Pummeler_getChargeNumber(Pummeler_getChargesText{})
+    return bag_charges + equip_charges, equip_charges;
+end;
+
+
+--function get_MCPTooltip()
+    --SpellId=13494 for the haste buff
+    --if not MCPTooltip then
+        --CreateFrame("GameTooltip", "MCPTooltip", UIParent, "GameTooltipTemplate");
+        --MCPTooltip:SetOwner(UIParent, "ANCHOR_NONE");
+        --MCPTooltip:SetInventoryItem("player", 16, nil, nil);
+    --end;
+    --return MCPTooltipTextLeft11:GetText();
+--end;
+
+
 function Pummeler_getChargesText(options)
 	pummelerTooltip:SetOwner( WorldFrame, "ANCHOR_NONE" );
 	if(options.bag and options.slot) then 
