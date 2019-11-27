@@ -54,7 +54,7 @@ function Pummeler_main()
 		--if(numBuffs < 32 or (currentForm == bearForm and attackSpeed > 1.7) or (currentForm == catForm and attackSpeed > 0.7)) then
 			if(weaponCd ~= 0) then
 				timeLeft = weaponCd - math.floor(gameTime - weaponTimer);
-				DEFAULT_CHAT_FRAME:AddMessage("Pummeler: "..itemLink.." On cooldown, "..timeLeft.." seconds left!");
+				DEFAULT_CHAT_FRAME:AddMessage("Pummeler: "..itemLink.." on cooldown, "..timeLeft.." seconds left!");
 			elseif(itemLink ~= nil and string.find(itemLink, pummelerWeapon) and charge > 0 and weaponCd == 0) then
 				buffTimeLeft = math.floor(gameTime - Pummeler_Start_HasteBuff_Time);
 				if(buffTimeLeft >= timeBetweenUses) then
@@ -247,3 +247,36 @@ function Pummeler_equipFullyCharged()
 		end;
 	end;
 end;
+
+
+function GetNextSpell()
+    local next_spell = nil
+    local autoattacking = IsCurrentSpell(6603);
+    local cur_energy = UnitPower("player", 3);
+    local cur_mana = UnitPower("player", 1);
+    local combo_pts = GetComboPoints("player", "target");
+    local clearcasting = UnitBuff("player", 16870); -- test this
+    local mcp_haste = UnitBuff("player", 13494); -- test this
+    local gcd = GetSpellCooldown(9832); -- shred spellID
+    local in_cat_form = nil;
+    _,_,in_cat_form = GetShapeshiftFormInfo(i);
+
+    if (~in_cat_form) then
+        next_spell = "Cat Form";
+    elseif (~autoattacking and cur_energy == 100) then
+        next_spell = "Tigers Fury";
+    elseif clearcasting then
+        next_spell = "Shred";
+    elseif (combo_pts == 5 and cur_energy < 52) then
+        next_spell = "Ferocious Bite";
+    elseif (cur_energy < 28 and cur_mana > 612) then
+        if gcd > 0 then
+            next_spell = "WAIT";
+        else
+            next_spell = "Cat Form";
+        end
+    else
+        next_spell = "Shred";
+    end
+    return next_spell
+end
