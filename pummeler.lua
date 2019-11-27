@@ -30,15 +30,14 @@ function Pummeler_main()
 	local timeBetweenUses = 3;
 	local bagPummeler, slotPummeler = nil;
 	local attackSpeed = UnitAttackSpeed("player");
-	local catForm, bearForm = nil;
+	local catForm = 3;
+	local bearForm = 1;
 	
 	--get user's current form
 	local currentForm = 0;
 	for i = 1, GetNumShapeshiftForms(), 1
 		do
-			_,formName,active = GetShapeshiftFormInfo(i);
-			if(formName == "Cat Form") then catForm = i; end;
-			if(string.find(formName, "Bear Form")) then bearForm = i; end;
+			_,_,active = GetShapeshiftFormInfo(i);
 			if(active ~= nil) then currentForm = i; end;
 	end;
 	
