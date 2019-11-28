@@ -6,8 +6,7 @@ Author: Oskros
 
 
 # Installation
-
-Unzip the FeralHelper folder into WoW directory Interface/Addons folder. Remove the -master from the folder name.
+Download the repository, unzip the FeralHelper folder into WoW directory Interface/Addons folder. Remove the -master from the folder name.
 
 # Usage
 You can use the following functions in macros and WeakAuras<br/><br/>
