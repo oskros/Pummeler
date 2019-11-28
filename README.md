@@ -1,5 +1,6 @@
 # FeralHelper
 Several LUA utility functions for Ferals in classic World of Warcraft (1.12.1). Used optimally together with WeakAuras
+Credit to Cernie at https://github.com/Cernie/Pummeler for functions used to scan the tooltip for getting MCP charges
 
 Author: Oskros
 
