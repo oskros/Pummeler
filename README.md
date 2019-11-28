@@ -16,22 +16,22 @@ Get text printout of charges for a specific MCP. Leave arguments empty to get ch
 /run print(Pummeler_getCharges{bag=0, slot=14})
 ```
 
-Get all available MCP charges in bag and equipped
+<br/>Get all available MCP charges in bag and equipped
 ```lua
 /run print(Pummeler_availableCharges())
 ```
 
-Get bag position of first encountered MCP. Set second argument to true for only returning MCP with 3 charges
+<br/>Get bag position of first encountered MCP. Set second argument to true for only returning MCP with 3 charges
 ```lua
 /run print(Pummeler_isPummelerInBag("Manual Crowd Pummeler", false))
 ```
 
-Check if the player has a specific buff active (test by SpellID) - example is for Clearcasting
+<br/>Check if the player has a specific buff active (test by SpellID) - example is for Clearcasting
 ```lua
 /run print(PlayerHasBuff(16870))
 ```
 
-Determine SpellIconID of the optimal next spell/ability to cast in the feral rotation. Usable in WeakAura dynamic icons
+<br/>Determine SpellIconID of the optimal next spell/ability to cast in the feral rotation. Usable in WeakAura dynamic icons
 ```lua
 /run print(GetNextSpell())
 ```
