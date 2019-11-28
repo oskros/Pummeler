@@ -11,7 +11,7 @@ Unzip the FeralHelper folder into WoW directory Interface/Addons folder. Remove 
 # Usage
 You can use the following functions in macros and WeakAuras
 
-- Get text printout of charges for a specific MCP. Leave arguments empty to get charges for current equipped MCP
+- Get text printout of charges for a specific MCP. Leave arguments empty to get charges for current equipped MCP\\
 <code>/run print(Pummeler_getCharges{bag=0, slot=14})</code>
 
 - Get all available MCP charges in bag and equipped
