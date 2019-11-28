@@ -1,8 +1,8 @@
 Pummeler = {};
 function Pummeler_OnLoad()
-    local frame = CreateFrame("FRAME", "DefaultFrame");
-	frame:RegisterEvent("PLAYER_ENTERING_WORLD");
-	frame:RegisterEvent("ADDON_LOADED");
+    local this = CreateFrame("FRAME", "DefaultFrame");
+	this:RegisterEvent("PLAYER_ENTERING_WORLD");
+	this:RegisterEvent("ADDON_LOADED");
 	DEFAULT_CHAT_FRAME:AddMessage("Pummeler addon loaded. Type /pummeler for usage.");
 	SlashCmdList["PUMMELER"] = function()
 		local msg = "To use Pummeler addon, create a macro and type /script Pummeler_main();";
@@ -77,11 +77,13 @@ function Pummeler_main()
 end;
 
 function Pummeler_availableCharges()
-    local bag_charges, equip_charges = 0;
+    createPummelerFrame();
+    local bag_charges = 0;
+	local equip_charges = 0;
     local pummeler_id = 9449;
     for i = 0, NUM_BAG_SLOTS do
         for z = 1, GetContainerNumSlots(i) do
-            if GetContainerItemID(i, z) = pummeler_id then
+            if GetContainerItemID(i, z) == pummeler_id then
                 bag_charges = bag_charges + Pummeler_getChargeNumber(Pummeler_getChargesText{bag=i, slot=z});
             end;
         end;
@@ -249,34 +251,47 @@ function Pummeler_equipFullyCharged()
 end;
 
 
+function PlayerHasBuff(spell_id)
+    for i = 1, 40 do
+        local name, icon, count, debuffType, duration, expirationTime, source, isStealable,
+  nameplateShowPersonal, spellId = UnitBuff("player", i)
+        if spellId == nil then
+            return false
+        elseif spellId == spell_id then
+            return true
+        end
+    end
+    return false
+end
+
+
 function GetNextSpell()
-    local next_spell = nil
+    local next_spell;
     local autoattacking = IsCurrentSpell(6603);
     local cur_energy = UnitPower("player", 3);
-    local cur_mana = UnitPower("player", 1);
+    local cur_mana = UnitPower("player", 0);
     local combo_pts = GetComboPoints("player", "target");
-    local clearcasting = UnitBuff("player", 16870); -- test this
-    local mcp_haste = UnitBuff("player", 13494); -- test this
+    local clearcasting = PlayerHasBuff(16870);
     local gcd = GetSpellCooldown(9832); -- shred spellID
-    local in_cat_form = nil;
-    _,_,in_cat_form = GetShapeshiftFormInfo(3);
+    local _, in_cat_form, _, _ = GetShapeshiftFormInfo(3);
 
-    if (~in_cat_form) then
-        next_spell = 768; -- Cat Form
-    elseif (~autoattacking and cur_energy == 100) then
-        next_spell = 5217; -- Tigers Fury
+    --if (not in_cat_form) then
+    --    next_spell = 132115; -- Cat Form
+    if (not autoattacking and cur_energy == 100) then
+        next_spell = 132242; -- Tigers Fury
     elseif clearcasting then
-        next_spell = 9832; -- Shred
+        next_spell = 136170; -- Clearcasting
     elseif (combo_pts == 5 and cur_energy < 63) then
-        next_spell = 22568 -- Ferocious Bite
+        next_spell = 132127 -- Ferocious Bite
     elseif (cur_energy < 28 and cur_mana > 612) then
+        --next_spell = 132115; -- Cat Form
         if gcd > 0 then
-            next_spell = "WAIT";
+            next_spell = 132116;
         else
-            next_spell = 768; -- Cat Form
+            next_spell = 132115; -- Cat Form
         end
     else
-        next_spell = 9832; -- Shred
+        next_spell = 136231; -- Shred
     end;
     return next_spell;
 end;
