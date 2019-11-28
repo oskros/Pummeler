@@ -23,7 +23,7 @@ You can use the following functions in macros and WeakAuras
 ```
 
  - Check if the player has a specific buff active (test by SpellID) - example is for Clearcasting<br/>
- <code>/run print(PlayerHasBuff(16870))</code>
+ <code lua>/run print(PlayerHasBuff(16870))</code>
 
  - Determine SpellIconID of the optimal next spell/ability to cast in the feral rotation. Usable in WeakAura dynamic icons<br/>
  <code>/run print(GetNextSpell())</code>
