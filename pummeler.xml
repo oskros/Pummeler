@@ -1,8 +1,0 @@
-<UI xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
-	<Script file="pummeler.lua"/>
-<Frame name="Pummeler" enableMouse="false" parent="UIParent">
-	<Scripts>
-		<OnLoad>Pummeler_OnLoad();</OnLoad>
-	</Scripts>
-</Frame>
-</UI>

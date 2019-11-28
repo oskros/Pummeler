@@ -1,7 +1,0 @@
-## Author: Cernie
-## Interface: 11200
-## Title: Pummeler
-## Notes: Script function for smart Manual Crowd Pummeler usage
-## Version: 1.8.1
-pummeler.xml
-pummeler.lua
