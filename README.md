@@ -18,7 +18,9 @@ You can use the following functions in macros and WeakAuras
 <code>/run print(Pummeler_availableCharges())</code>
 
 - Get bag position of first encountered MCP. Set second argument to true for only returning MCP with 3 charges<br/>
-<code>/run print(Pummeler_isPummelerInBag("Manual Crowd Pummeler", false))</code>
+```lua
+/run print(Pummeler_isPummelerInBag("Manual Crowd Pummeler", false))
+```
 
  - Check if the player has a specific buff active (test by SpellID) - example is for Clearcasting<br/>
  <code>/run print(PlayerHasBuff(16870))</code>
