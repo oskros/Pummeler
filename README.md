@@ -9,21 +9,19 @@ Author: Cernie (fixed for classic by Oskros)
 Unzip the FeralHelper folder into WoW directory Interface/Addons folder. Remove the -master from the folder name.
 
 # Usage
-You can use the following functions in macros and WeakAuras
+You can use the following functions in macros and WeakAuras<br/>
 
-- Get text printout of charges for a specific MCP. Leave arguments empty to get charges for current equipped MCP<br/>
-<code>/run print(Pummeler_getCharges{bag=0, slot=14})</code>
+- Get text printout of charges for a specific MCP. Leave arguments empty to get charges for current equipped MCP
+```lua /run print(Pummeler_getCharges{bag=0, slot=14}) ```
 
-- Get all available MCP charges in bag and equipped<br/>
-<code>/run print(Pummeler_availableCharges())</code>
+- Get all available MCP charges in bag and equipped
+```lua /run print(Pummeler_availableCharges()) ```
 
 - Get bag position of first encountered MCP. Set second argument to true for only returning MCP with 3 charges
-```lua
-/run print(Pummeler_isPummelerInBag("Manual Crowd Pummeler", false))
-```
+```lua /run print(Pummeler_isPummelerInBag("Manual Crowd Pummeler", false)) ```
 
- - Check if the player has a specific buff active (test by SpellID) - example is for Clearcasting<br/>
- <code lua>/run print(PlayerHasBuff(16870))</code>
+ - Check if the player has a specific buff active (test by SpellID) - example is for Clearcasting
+```lua /run print(PlayerHasBuff(16870)) ```
 
- - Determine SpellIconID of the optimal next spell/ability to cast in the feral rotation. Usable in WeakAura dynamic icons<br/>
- <code>/run print(GetNextSpell())</code>
+ - Determine SpellIconID of the optimal next spell/ability to cast in the feral rotation. Usable in WeakAura dynamic icons
+  ```lua /run print(GetNextSpell()) ```
