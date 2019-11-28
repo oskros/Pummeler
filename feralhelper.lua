@@ -1,17 +1,17 @@
-FeralHelper = {};
-function Pummeler_OnLoad()
-    local this = CreateFrame("FRAME", "DefaultFrame");
-	this:RegisterEvent("PLAYER_ENTERING_WORLD");
-	this:RegisterEvent("ADDON_LOADED");
-	DEFAULT_CHAT_FRAME:AddMessage("Pummeler addon loaded. Type /pummeler for usage.");
-	SlashCmdList["PUMMELER"] = function()
-		local msg = "To use Pummeler addon, create a macro and type /script Pummeler_main();";
-		local msg2 = "To equip a fully charged Manual Crowd Pummeler, create a separate macro and type /script Pummeler_equipFullyCharged();";
-		DEFAULT_CHAT_FRAME:AddMessage(msg);
-		DEFAULT_CHAT_FRAME:AddMessage(msg2);
-	end;
-	SLASH_PUMMELER1 = "/pummeler";
-end;
+--FeralHelper = {};
+--function Pummeler_OnLoad()
+--    local this = CreateFrame("FRAME", "DefaultFrame");
+--	this:RegisterEvent("PLAYER_ENTERING_WORLD");
+--	this:RegisterEvent("ADDON_LOADED");
+--	DEFAULT_CHAT_FRAME:AddMessage("Pummeler addon loaded. Type /pummeler for usage.");
+--	SlashCmdList["PUMMELER"] = function()
+--		local msg = "To use Pummeler addon, create a macro and type /script Pummeler_main();";
+--		local msg2 = "To equip a fully charged Manual Crowd Pummeler, create a separate macro and type /script Pummeler_equipFullyCharged();";
+--		DEFAULT_CHAT_FRAME:AddMessage(msg);
+--		DEFAULT_CHAT_FRAME:AddMessage(msg2);
+--	end;
+--	SLASH_PUMMELER1 = "/pummeler";
+--end;
 
 
 function createPummelerFrame()
@@ -78,13 +78,13 @@ end;
 
 
 --function get_MCPTooltip()
-    --SpellId=13494 for the haste buff
-    --if not MCPTooltip then
-        --CreateFrame("GameTooltip", "MCPTooltip", UIParent, "GameTooltipTemplate");
-        --MCPTooltip:SetOwner(UIParent, "ANCHOR_NONE");
-        --MCPTooltip:SetInventoryItem("player", 16, nil, nil);
-    --end;
-    --return MCPTooltipTextLeft11:GetText();
+--    SpellId=13494 for the haste buff
+--    if not MCPTooltip then
+--        CreateFrame("GameTooltip", "MCPTooltip", UIParent, "GameTooltipTemplate");
+--        MCPTooltip:SetOwner(UIParent, "ANCHOR_NONE");
+--        MCPTooltip:SetInventoryItem("player", 16, nil, nil);
+--    end;
+--    return MCPTooltipTextLeft11:GetText();
 --end;
 
 

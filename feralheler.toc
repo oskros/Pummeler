@@ -3,5 +3,5 @@
 ## Title: FeralHelper
 ## Notes: LUA functions for feral DPS (forked from Cernie "Pummeler" addon)
 ## Version: 1.0
-feralhelper.xml
+
 feralhelper.lua
