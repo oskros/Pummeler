@@ -1,7 +1,7 @@
-# Pummeler
-One button for equipping and using Manual Crowd Pummeler(s) in vanilla World of Warcraft (1.12.1).
+# FeralHelper
+Several LUA utility functions for Ferals in classic World of Warcraft (1.12.1). Used optimally together with WeakAuras
 
-Author: Cernie (fixed for classic by Oskros)
+Author: Oskros
 
 
 # Installation
