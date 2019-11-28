@@ -32,7 +32,7 @@ Get text printout of charges for a specific MCP. Leave arguments empty to get ch
 /run print(PlayerHasBuff(16870))
 ```
 
-<br/>Determine SpellIconID of the optimal next spell/ability to cast in the feral rotation. Usable in WeakAura dynamic icons
+<br/>Determine SpellIconID of the next spell/ability to cast in the optimal feral DPS rotation during raids. Can be set-up with WeakAuras to show a dynamic changing icon
 ```lua
 /run print(GetNextSpell())
 ```
