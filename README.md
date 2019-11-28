@@ -17,7 +17,7 @@ You can use the following functions in macros and WeakAuras
 - Get all available MCP charges in bag and equipped<br/>
 <code>/run print(Pummeler_availableCharges())</code>
 
-- Get bag position of first encountered MCP. Set second argument to true for only returning MCP with 3 charges<br/>
+- Get bag position of first encountered MCP. Set second argument to true for only returning MCP with 3 charges
 ```lua
 /run print(Pummeler_isPummelerInBag("Manual Crowd Pummeler", false))
 ```
