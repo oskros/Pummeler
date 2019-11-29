@@ -16,16 +16,16 @@ function FH_PummelerChargesText(options)
 	end;
 	local charges;
 	local i = 1;
-	while (true)
-		do
-			text = getglobal("pummelerTooltipTextLeft"..i):GetText();
-			if(not text) then break;
-			elseif(string.find(text, "Charge")) then
-				charges = text;
-				pummelerTooltip:Hide();
-				return charges;
-			end;
-			i=i+1;
+	while (true) do
+		text = getglobal("pummelerTooltipTextLeft"..i):GetText();
+		if (not text) then
+			break;
+		elseif (string.find(text, "Charge")) then
+			charges = text;
+			pummelerTooltip:Hide();
+			return charges;
+		end;
+		i=i+1;
 	end;
 	pummelerTooltip:Hide();
 	return charges;
@@ -35,12 +35,11 @@ end;
 -- Converts the output of "FH_PummelerChargesText" to a number
 function FH_PummelerChargesNumber(chargesText)
 	local charge = 0;
-	if(chargesText ~= nil) then
-		for i = 0, 3, 1
-			do
-				if(chargesText ~= nil and string.find(chargesText, i)) then
-					charge = i; break;
-				end;
+	if (chargesText ~= nil) then
+		for i = 0, 3 do
+			if (chargesText ~= nil and string.find(chargesText, i)) then
+				charge = i; break;
+			end;
 		end;
 	end;
 	return charge;
@@ -56,11 +55,11 @@ function FH_AvailablePummelerCharges()
     for i = 0, NUM_BAG_SLOTS do
         for z = 1, GetContainerNumSlots(i) do
             if GetContainerItemID(i, z) == pummeler_id then
-                bag_charges = bag_charges + FH_PummelerChargesNumber(FH_PummelerChargesText { bag=i, slot=z});
+                bag_charges = bag_charges + FH_PummelerChargesNumber(FH_PummelerChargesText{bag=i, slot=z});
             end;
         end;
     end;
-    equip_charges = FH_PummelerChargesNumber(FH_PummelerChargesText {})
+    equip_charges = FH_PummelerChargesNumber(FH_PummelerChargesText{})
     return bag_charges + equip_charges, equip_charges;
 end;
 
@@ -74,7 +73,7 @@ function FH_ItemBagPosition(itemName, threeChargesFlag)
 			local name = GetContainerItemLink(bag,slot)
 			if name and string.find(name, itemName) then
 				if string.find(name, itemName) then
-					charges = FH_PummelerChargesNumber(FH_PummelerChargesText { bag = bag, slot = slot});
+					charges = FH_PummelerChargesNumber(FH_PummelerChargesText{bag = bag, slot = slot});
 					if (threeChargesFlag == true) then
 						if (charges == 3) then
 							itemBag = bag; itemSlot = slot;
@@ -160,9 +159,8 @@ function Pummeler_isBuffNameActive(buff)
 	local index = -1;
 	local i = 1;
 	local numBuffs;
-	local g=UnitBuff;
 	local textleft1;
-	while not(g("player", i) == -1 or g("player", i) == nil)
+	while not(UnitBuff("player", i) == -1 or UnitBuff("player", i) == nil)
 		do
 		pummelerTooltip:SetOwner(WorldFrame, "ANCHOR_NONE");
 		pummelerTooltip:SetUnitBuff("player", i);
@@ -203,12 +201,19 @@ end;
 
 
 
---function get_MCPTooltip()
---    SpellId=13494 for the haste buff
---    if not MCPTooltip then
---        CreateFrame("GameTooltip", "MCPTooltip", UIParent, "GameTooltipTemplate");
---        MCPTooltip:SetOwner(UIParent, "ANCHOR_NONE");
---        MCPTooltip:SetInventoryItem("player", 16, nil, nil);
---    end;
---    return MCPTooltipTextLeft11:GetText();
---end;
+function get_MCPTooltip(options)
+    --SpellId=13494 for the haste buff
+	local text;
+	if not MCPTooltip then
+		CreateFrame("GameTooltip", "MCPTooltip", UIParent, "GameTooltipTemplate");
+		MCPTooltip:SetOwner(UIParent, "ANCHOR_NONE");
+	end;
+	if(options.bag and options.slot) then
+		MCPTooltip:SetBagItem(options.bag, options.slot);
+	else
+		MCPTooltip:SetInventoryItem("player", 16);
+	end;
+    text = MCPTooltipTextLeft11:GetText();
+	MCPTooltip:Hide();
+	return text;
+end;
