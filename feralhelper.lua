@@ -64,35 +64,9 @@ function FH_AvailablePummelerCharges()
 end;
 
 
--- Finds the first encountered bag position of an item by name
-function FH_ItemBagPosition(itemName, threeChargesFlag)
-    local itemBag, itemSlot;
-	local charges;
-    for bag = 0, NUM_BAG_SLOTS do
-		for slot = 1, GetContainerNumSlots(bag) do
-			local name = GetContainerItemLink(bag,slot)
-			if name and string.find(name, itemName) then
-				if string.find(name, itemName) then
-					charges = FH_PummelerChargesNumber(FH_PummelerChargesText{bag = bag, slot = slot});
-					if (threeChargesFlag == true) then
-						if (charges == 3) then
-							itemBag = bag; itemSlot = slot;
-							return itemBag, itemSlot;
-						end;
-					elseif (charges > 0) then
-						itemBag = bag; itemSlot = slot;
-						return itemBag, itemSlot;
-					end;
-				end;
-			end;
-		end;
-	end;
-    return itemBag, itemSlot;   
-end;
-
-
 -- Checking if player has buff by SpellID
 function FH_PlayerHasBuff(spell_id)
+	-- SpellId = 13494 for the MCP haste buff
     for i = 1, 40 do
         local _, _, _, _, _, _, _, _, _, spellId = UnitBuff("player", i)
         if spellId == nil then
@@ -105,8 +79,8 @@ function FH_PlayerHasBuff(spell_id)
 end
 
 
--- Gets the spellIcon for the next spell to be used in optimal rotation
-function FH_GetNextSpellIcon()
+-- Gets the spellIcon for the next spell to be used in optimal cat rotation
+function FH_CatRotationSpellIcon()
     local next_spell;
     local autoattacking = IsCurrentSpell(6603);
     local cur_energy = UnitPower("player", 3);
@@ -131,8 +105,8 @@ end;
 
 -- Simplified function to extract the number of charges from a manual crowd pummeler
 function FH_getMCPcharges(options)
-    --SpellId=13494 for the haste buff
-	local text, charges;
+	local text;
+	local charges = 0;
 	if not MCPTooltip then
 		CreateFrame("GameTooltip", "MCPTooltip", nil, "GameTooltipTemplate");
 	end;
@@ -144,6 +118,8 @@ function FH_getMCPcharges(options)
 	end;
     text = MCPTooltipTextLeft11:GetText();
 	MCPTooltip:Hide();
-	charges, _ = strsplit(" ", text, 2)
+	if string.find(text, "Charge") then
+		charges, _ = strsplit(" ", text, 2);
+	end;
 	return charges;
 end;
