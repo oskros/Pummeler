@@ -106,31 +106,22 @@ end
 
 
 -- Gets the spellIcon for the next spell to be used in optimal rotation
-function FH_GetNextSpell()
+function FH_GetNextSpellIcon()
     local next_spell;
     local autoattacking = IsCurrentSpell(6603);
     local cur_energy = UnitPower("player", 3);
     local cur_mana = UnitPower("player", 0);
     local combo_pts = GetComboPoints("player", "target");
     local clearcasting = FH_PlayerHasBuff(16870);
-    local _, gcd, _ = GetSpellCooldown(9832); -- shred spellID TODO: TEST THIS FUNCTION!
-    --local _, in_cat_form, _, _ = GetShapeshiftFormInfo(3);
 
-    --if (not in_cat_form) then
-    --    next_spell = 132115; -- Cat Form
-    if (not autoattacking and cur_energy == 100) then
-        next_spell = 132242; -- Tigers Fury
-    elseif clearcasting then
+	if clearcasting then
         next_spell = 136170; -- Clearcasting
+    elseif (not autoattacking and cur_energy == 100) then
+        next_spell = 132242; -- Tigers Fury
     elseif (combo_pts == 5 and cur_energy < 63) then
         next_spell = 132127 -- Ferocious Bite
     elseif (cur_energy < 28 and cur_mana > 612) then
-        --next_spell = 132115; -- Cat Form
-        if gcd > 0 then
-            next_spell = 132116;
-        else
-            next_spell = 132115; -- Cat Form
-        end
+		next_spell = 132115; -- Cat Form
     else
         next_spell = 136231; -- Shred
     end;
@@ -138,76 +129,14 @@ function FH_GetNextSpell()
 end;
 
 
--- Cernie's function. Currently untested
-function Pummeler_isBuffTextureActive(texture)
-	local i=0;
-	local g=GetPlayerBuff;
-	local isBuffActive = false;
-
-	while not(g(i) == -1)
-	do
-		if(strfind(GetPlayerBuffTexture(g(i)), texture)) then isBuffActive = true; end;
-		i=i+1
-	end;
-	return isBuffActive;
-end;
-
-
--- Cernie's function. Currently untested
-function Pummeler_isBuffNameActive(buff)
-	local isActive = false;
-	local index = -1;
-	local i = 1;
-	local numBuffs;
-	local textleft1;
-	while not(UnitBuff("player", i) == -1 or UnitBuff("player", i) == nil)
-		do
-		pummelerTooltip:SetOwner(WorldFrame, "ANCHOR_NONE");
-		pummelerTooltip:SetUnitBuff("player", i);
-		textleft1 = getglobal(pummelerTooltip:GetName().."TextLeft1");
-
-		if(textleft1 ~= nil and string.find(string.lower(textleft1:GetText()), string.lower(buff))) then
-			isActive = true;
-			index = i - 1;
-			pummelerTooltip:Hide();
-			break;
-		end;
-		pummelerTooltip:Hide();
-		i=i+1;
-	end;
-	if(index == -1) then
-		numBuffs = 0;
-	else
-		numBuffs = i;
-	end;
-	return isActive, index, numBuffs;
-end;
-
-
---Pummeler = {};
---function Pummeler_OnLoad()
---    local this = CreateFrame("FRAME", "DefaultFrame");
---	this:RegisterEvent("PLAYER_ENTERING_WORLD");
---	this:RegisterEvent("ADDON_LOADED");
---	DEFAULT_CHAT_FRAME:AddMessage("Pummeler addon loaded. Type /pummeler for usage.");
---	SlashCmdList["PUMMELER"] = function()
---		local msg = "To use Pummeler addon, create a macro and type /script Pummeler_main();";
---		local msg2 = "To equip a fully charged Manual Crowd Pummeler, create a separate macro and type /script Pummeler_equipFullyCharged();";
---		DEFAULT_CHAT_FRAME:AddMessage(msg);
---		DEFAULT_CHAT_FRAME:AddMessage(msg2);
---	end;
---	SLASH_PUMMELER1 = "/pummeler";
---end;
-
-
-
-function get_MCPTooltip(options)
+-- Simplified function to extract the number of charges from a manual crowd pummeler
+function FH_getMCPcharges(options)
     --SpellId=13494 for the haste buff
-	local text;
+	local text, charges;
 	if not MCPTooltip then
-		CreateFrame("GameTooltip", "MCPTooltip", UIParent, "GameTooltipTemplate");
-		MCPTooltip:SetOwner(UIParent, "ANCHOR_NONE");
+		CreateFrame("GameTooltip", "MCPTooltip", nil, "GameTooltipTemplate");
 	end;
+	MCPTooltip:SetOwner(WorldFrame, "ANCHOR_NONE");
 	if(options.bag and options.slot) then
 		MCPTooltip:SetBagItem(options.bag, options.slot);
 	else
@@ -215,5 +144,6 @@ function get_MCPTooltip(options)
 	end;
     text = MCPTooltipTextLeft11:GetText();
 	MCPTooltip:Hide();
-	return text;
+	charges, _ = strsplit(" ", text, 2)
+	return charges;
 end;
